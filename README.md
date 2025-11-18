@@ -1,2 +1,9 @@
 # og
+
 Own Ghost - A deamon that will observe your activities and help you make AI contexts from them
+
+Own Ghost (OG) is a modular, extensible system for self-observation and intelligent reflection. It allows users to register observers—modular plugins that monitor activity across a wide range of sources: GitHub commits, keyboard input, application usage, browser history, and more. Each observer conforms to a shared interface, enabling consistent background tracking and asynchronous, timestamped data collection. These observations are serialized to local files, indexed continuously, and embedded into a vector database—making the full scope of one’s recent activity instantly searchable.
+
+On top of this observation layer, OG adds an intelligent agent capable of interpreting and summarizing behavior. Users can query their history conversationally or receive automated synopses such as “What did I work on yesterday?” or “What projects have I touched this week?” The AI agent doesn’t just retrieve facts; it contextualizes them, helping users understand progress, identify patterns, and stay oriented. The long-term vision includes a live analysis and alerting layer: as activity is being tracked, OG can also think in real time—issuing notifications when a behavioral pattern warrants attention (e.g., deep focus time is broken, a new task context is emerging, or something forgotten resurfaces).
+
+OG acts as a silent partner, a persistent digital witness with memory and insight. It is neither intrusive nor controlling—it observes, thinks, and advises only when asked or when its understanding reaches a threshold of usefulness. The name, Own Ghost, captures this duality: a private, ever-present watcher that remembers what the conscious mind may forget, surfacing only to help its host see themselves more clearly.
