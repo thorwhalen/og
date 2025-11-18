@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>OG Browser Extension</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 15px;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+    }
+
+    .status {
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .status.connected {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .status.disconnected {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .stats {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .stat-item {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔍 OG Browser Extension</h2>
+
+  <div id="status" class="status">
+    Checking connection...
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <strong>Pages visited today:</strong> <span id="pagesCount">-</span>
+    </div>
+    <div class="stat-item">
+      <strong>Reading time:</strong> <span id="readingTime">-</span>
+    </div>
+    <div class="stat-item">
+      <strong>Highlights:</strong> <span id="highlightsCount">-</span>
+    </div>
+  </div>
+
+  <button id="openDashboard">Open OG Dashboard</button>
+  <button id="exportData">Export Data</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

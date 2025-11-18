@@ -14,7 +14,26 @@ keywords = []
 authors = [
     { name = "Thor Whalen" },
 ]
-dependencies = []
+dependencies = [
+    # Core dependencies (minimal)
+    "dol>=0.2.38",  # Storage layer
+    "i2>=0.1.20",   # Signature operations and wrapping
+    "meshed>=0.1.20",  # DAG composition and workflow assembly
+
+    # AI dependencies
+    "oa>=0.0.1",  # AI/LLM interface (preferred)
+    "openai>=1.0.0",  # Fallback for AI functionality
+
+    # Observer dependencies (optional but recommended)
+    "PyGithub>=2.0.0",  # GitHub observer
+    "pynput>=1.7.6",  # Keyboard and mouse tracking
+    "watchdog>=3.0.0",  # File system monitoring
+    "psutil>=5.9.0",  # Process and system monitoring
+
+    # Embedding and vector search (for searchable history)
+    "chromadb>=0.4.0",  # Vector database
+    "sentence-transformers>=2.2.0",  # Text embeddings
+]
 
 [project.license]
 text = "mit"
@@ -22,6 +41,9 @@ text = "mit"
 [project.urls]
 Homepage = "https://github.com/thorwhalen/og"
 Repository = "https://github.com/thorwhalen/og"
+
+[project.scripts]
+og = "og.daemon:cli"
 
 [project.optional-dependencies]
 dev = [
@@ -32,6 +54,59 @@ dev = [
 docs = [
     "sphinx>=6.0",
     "sphinx-rtd-theme>=1.0",
+]
+web = [
+    # Web dashboard dependencies
+    "flask>=3.0.0",
+    "plotly>=5.0.0",
+]
+privacy = [
+    # Privacy and encryption features
+    "cryptography>=41.0.0",
+]
+integrations = [
+    # Email and Calendar
+    "google-api-python-client>=2.0.0",
+    "google-auth-httplib2>=0.1.0",
+    "google-auth-oauthlib>=1.0.0",
+    # Slack
+    "slack-sdk>=3.0.0",
+    # Music tracking
+    "spotipy>=2.23.0",
+    "pylast>=5.0.0",
+    # Export integrations
+    "notion-client>=2.0.0",
+]
+all = [
+    # All optional observers and features
+    "PyGithub>=2.0.0",
+    "pynput>=1.7.6",
+    "watchdog>=3.0.0",
+    "psutil>=5.9.0",
+    "chromadb>=0.4.0",
+    "sentence-transformers>=2.2.0",
+    # Web dashboard
+    "flask>=3.0.0",
+    "plotly>=5.0.0",
+    # Privacy features
+    "cryptography>=41.0.0",
+    # Integrations
+    "google-api-python-client>=2.0.0",
+    "google-auth-httplib2>=0.1.0",
+    "google-auth-oauthlib>=1.0.0",
+    "slack-sdk>=3.0.0",
+    "spotipy>=2.23.0",
+    "pylast>=5.0.0",
+    "notion-client>=2.0.0",
+    # Platform-specific (Windows)
+    "pywin32>=305; platform_system=='Windows'",
+]
+minimal = [
+    # Minimal installation without heavy ML dependencies
+    "dol>=0.2.38",
+    "i2>=0.1.20",
+    "meshed>=0.1.20",
+    "openai>=1.0.0",
 ]
 
 [tool.ruff]
