@@ -1,7 +1,5 @@
 [build-system]
-requires = [
-    "hatchling",
-]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
@@ -11,28 +9,26 @@ description = "Own Ghost - A deamon that will observe your activities and help y
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = []
-authors = [
-    { name = "Thor Whalen" },
-]
+authors = [{ name = "Thor Whalen" }]
 dependencies = [
     # Core dependencies (minimal)
-    "dol>=0.2.38",  # Storage layer
-    "i2>=0.1.20",   # Signature operations and wrapping
-    "meshed>=0.1.20",  # DAG composition and workflow assembly
+    "dol>=0.2.38",    # Storage layer
+    "i2>=0.1.20",     # Signature operations and wrapping
+    "meshed>=0.1.20", # DAG composition and workflow assembly
 
     # AI dependencies
-    "oa>=0.0.1",  # AI/LLM interface (preferred)
-    "openai>=1.0.0",  # Fallback for AI functionality
+    "oa>=0.0.1",     # AI/LLM interface (preferred)
+    "openai>=1.0.0", # Fallback for AI functionality
 
     # Observer dependencies (optional but recommended)
-    "PyGithub>=2.0.0",  # GitHub observer
-    "pynput>=1.7.6",  # Keyboard and mouse tracking
-    "watchdog>=3.0.0",  # File system monitoring
-    "psutil>=5.9.0",  # Process and system monitoring
+    "PyGithub>=2.0.0", # GitHub observer
+    "pynput>=1.7.6",   # Keyboard and mouse tracking
+    "watchdog>=3.0.0", # File system monitoring
+    "psutil>=5.9.0",   # Process and system monitoring
 
     # Embedding and vector search (for searchable history)
-    "chromadb>=0.4.0",  # Vector database
-    "sentence-transformers>=2.2.0",  # Text embeddings
+    "chromadb>=0.4.0",              # Vector database
+    "sentence-transformers>=2.2.0", # Text embeddings
 ]
 
 [project.license]
@@ -46,15 +42,8 @@ Repository = "https://github.com/thorwhalen/og"
 og = "og.daemon:cli"
 
 [project.optional-dependencies]
-dev = [
-    "pytest>=7.0",
-    "pytest-cov>=4.0",
-    "ruff>=0.1.0",
-]
-docs = [
-    "sphinx>=6.0",
-    "sphinx-rtd-theme>=1.0",
-]
+dev = ["pytest>=7.0", "pytest-cov>=4.0", "ruff>=0.1.0"]
+docs = ["sphinx>=6.0", "sphinx-rtd-theme>=1.0"]
 web = [
     # Web dashboard dependencies
     "flask>=3.0.0",
@@ -124,35 +113,18 @@ exclude = [
 ]
 
 [tool.ruff.lint]
-select = [
-    "D100",
-]
-ignore = [
-    "D203",
-    "E501",
-    "B905",
-]
+select = ["D100"]
+ignore = ["D203", "E501", "B905"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = [
-    "D",
-]
-"examples/*" = [
-    "D",
-]
-"scrap/*" = [
-    "D",
-]
+"**/tests/*" = ["D"]
+"**/examples/*" = ["D"]
+"**/scrap/*" = ["D"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-testpaths = [
-    "tests",
-]
-doctest_optionflags = [
-    "NORMALIZE_WHITESPACE",
-    "ELLIPSIS",
-]
+testpaths = ["tests"]
+doctest_optionflags = ["NORMALIZE_WHITESPACE", "ELLIPSIS"]
