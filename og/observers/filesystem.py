@@ -107,8 +107,8 @@ class FileSystemObserver(BaseObserver):
 
         except ImportError:
             print(
-                "watchdog is required for filesystem observer. "
-                "Install it with: pip install watchdog"
+                "watchdog is required for the filesystem observer. "
+                "Install it with: pip install 'og[observers]'"
             )
 
     def stop(self):

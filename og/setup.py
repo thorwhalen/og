@@ -389,7 +389,8 @@ class SetupWizard:
 
         dependency_groups = {
             '1': ('Core', ['dol', 'i2', 'meshed', 'oa', 'openai']),
-            '2': ('Observers', ['PyGithub', 'pynput', 'watchdog', 'psutil']),
+            '2': ('Observers [og[observers]] — note: PyGithub is LGPL',
+                  ['PyGithub', 'pynput', 'watchdog', 'psutil']),
             '3': ('Semantic Search', ['chromadb', 'sentence-transformers']),
             '4': ('Web Dashboard', ['flask', 'plotly']),
             '5': ('Privacy', ['cryptography']),
