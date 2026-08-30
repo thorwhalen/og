@@ -78,6 +78,10 @@ jobs:
 
       - name: Report test results
         if: always()
+        # windows-latest defaults to pwsh, which cannot parse the bash `if [ ]`
+        # below; without this the step errors out and the "informational" job
+        # reports failure for a reason that has nothing to do with the tests.
+        shell: bash
         run: |
           if [ "${{ steps.test.outcome }}" == "failure" ]; then
             echo "::warning::Windows tests failed but workflow continues"

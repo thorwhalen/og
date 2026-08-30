@@ -18,6 +18,7 @@ class ObserverRegistry(MutableMapping):
     discovery, registration, and access.
 
     Example:
+        >>> from og.observers import GithubObserver
         >>> registry = ObserverRegistry()
         >>> registry['github'] = GithubObserver()
         >>> 'github' in registry

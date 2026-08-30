@@ -4,13 +4,15 @@ Own Ghost is a modular, extensible system for self-observation and intelligent r
 It allows you to register observers that monitor activity across various sources:
 GitHub commits, keyboard input, application usage, browser history, and more.
 
-Quick Start:
+Quick Start (illustrative; these start a daemon and call an LLM, so they are
+not executed as doctests):
+
     >>> from og import OG
-    >>> og = OG()
-    >>> og.start()  # Start observing
+    >>> og = OG()                                            # doctest: +SKIP
+    >>> og.start()  # Start observing                        # doctest: +SKIP
     >>> # Later...
-    >>> print(og.summary(days=1))  # Get summary of today
-    >>> print(og.ask("What did I work on yesterday?"))
+    >>> print(og.summary(days=1))  # Get summary of today    # doctest: +SKIP
+    >>> print(og.ask("What did I work on yesterday?"))       # doctest: +SKIP
 
 Main Classes:
     - OG: Main interface for querying and controlling the system

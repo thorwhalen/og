@@ -197,8 +197,8 @@ class OG:
             AI-generated summary
 
         Example:
-            >>> og = OG()
-            >>> print(og.summary(days=1))
+            >>> og = OG()                      # doctest: +SKIP
+            >>> print(og.summary(days=1))      # doctest: +SKIP
             "Today you focused primarily on coding..."
         """
         return self.agent.summarize_period(days=days, detail_level=detail)
@@ -214,8 +214,8 @@ class OG:
             AI-generated answer
 
         Example:
-            >>> og = OG()
-            >>> print(og.ask("What did I work on yesterday?"))
+            >>> og = OG()                                       # doctest: +SKIP
+            >>> print(og.ask("What did I work on yesterday?"))   # doctest: +SKIP
         """
         return self.agent.answer_question(question, days=days)
 
@@ -234,8 +234,8 @@ class OG:
             AI-generated report
 
         Example:
-            >>> og = OG()
-            >>> print(og.report(days=7, report_type='productivity'))
+            >>> og = OG()                                                # doctest: +SKIP
+            >>> print(og.report(days=7, report_type='productivity'))      # doctest: +SKIP
         """
         return self.agent.generate_report(days=days, report_type=report_type)
 
