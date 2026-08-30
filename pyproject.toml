@@ -20,12 +20,6 @@ dependencies = [
     "oa>=0.0.1",     # AI/LLM interface (preferred)
     "openai>=1.0.0", # Fallback for AI functionality
 
-    # Observer dependencies (optional but recommended)
-    "PyGithub>=2.0.0", # GitHub observer
-    "pynput>=1.7.6",   # Keyboard and mouse tracking
-    "watchdog>=3.0.0", # File system monitoring
-    "psutil>=5.9.0",   # Process and system monitoring
-
     # Embedding and vector search (for searchable history)
     "chromadb>=0.4.0",              # Vector database
     "sentence-transformers>=2.2.0", # Text embeddings
@@ -44,6 +38,22 @@ og = "og.daemon:cli"
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "pytest-cov>=4.0", "ruff>=0.1.0"]
 docs = ["sphinx>=6.0", "sphinx-rtd-theme>=1.0"]
+observers = [
+    # Third-party libraries the optional observers import lazily. Every one of
+    # these is imported inside a method, never at module scope, so `import og`
+    # works without them and each observer raises an informative ImportError
+    # naming this extra.
+    #
+    # NOTE ON LICENCE: PyGithub's only licence signal is the classifier
+    # "License :: OSI Approved :: GNU Library or Lesser General Public License
+    # (LGPL)". og itself is MIT. Keeping it here rather than in the core
+    # dependencies means `pip install og` pulls no copyleft distribution — see
+    # [tool.wads.licence] below.
+    "PyGithub>=2.0.0", # GitHub observer (LGPL - see [tool.wads.licence])
+    "pynput>=1.7.6",   # Keyboard and mouse tracking
+    "watchdog>=3.0.0", # File system monitoring
+    "psutil>=5.9.0",   # Process and system monitoring
+]
 web = [
     # Web dashboard dependencies
     "flask>=3.0.0",
@@ -128,3 +138,43 @@ convention = "google"
 minversion = "6.0"
 testpaths = ["tests"]
 doctest_optionflags = ["NORMALIZE_WHITESPACE", "ELLIPSIS"]
+
+# --------------------------------------------------------------------------
+# Licence adjudication
+#
+# og is MIT. The only non-permissive distribution it can pull is PyGithub,
+# whose sole licence signal is an LGPL classifier (PyGithub 2.8.1 ships no
+# License-Expression and an empty License field). It reaches a user only via
+# an opt-in extra, never via `pip install og`. Recorded so the planned wads
+# licence check reports "known, gated and accepted" rather than a violation,
+# and so extras are checked rather than silently skipped.
+# --------------------------------------------------------------------------
+[tool.wads.licence]
+project_licence = "MIT"
+allow = ["MIT", "BSD-2-Clause", "BSD-3-Clause", "Apache-2.0", "ISC", "PSF-2.0"]
+# Hard deps alone would report og as clean, which is correct and incomplete.
+include_extras = ["observers", "all"]
+
+[[tool.wads.licence.exceptions]]
+dependency = "PyGithub"
+licence = "LGPL (classifier only; no SPDX expression published)"
+scope = "extra:observers, extra:all"
+decided = "2026-08-30"
+decided_in = "https://github.com/thorwhalen/og/issues/1"
+reason = """
+Gated, not accepted into core. PyGithub was declared as a hard dependency
+next to a comment that called it optional; the comment was right and the
+declaration was wrong. og/observers/github.py imports `github` inside
+_get_github_client(), so nothing about `import og` needs it, and og's own
+setup wizard already grouped it under "Observers" rather than "Core".
+
+It now reaches a user only through `pip install "og[observers]"` (or
+[all]) - a deliberate opt-in that the README names as LGPL. The GitHub
+observer is one of a dozen interchangeable observers, so this is a real
+choice for the user, not a fig leaf: og is fully usable without it.
+
+No permissive replacement was sought because none is needed at this
+distance. Revisit only if the GitHub observer ever moves back into the
+core import path, or if og starts shipping frozen/bundled artifacts where
+the LGPL relink freedom is no longer automatic.
+"""

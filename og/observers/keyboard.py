@@ -99,8 +99,8 @@ class KeyboardObserver(BaseObserver):
 
         except ImportError:
             raise ImportError(
-                "pynput is required for keyboard observer. "
-                "Install it with: pip install pynput"
+                "pynput is required for the keyboard observer. "
+                "Install it with: pip install 'og[observers]'"
             )
 
     def _get_active_application(self) -> Optional[str]:

@@ -54,6 +54,7 @@ pip install og
 pip install og[all]
 
 # Specific feature sets
+pip install og[observers]     # GitHub, keyboard, filesystem and process observers
 pip install og[web]           # Web dashboard
 pip install og[privacy]       # Encryption and privacy features
 pip install og[integrations]  # Email, Slack, Calendar, Music, Export integrations
@@ -64,6 +65,14 @@ pip install og[dev]
 # Minimal installation (just core features)
 pip install og[minimal]
 ```
+
+> **Licensing note.** og is MIT. The `observers` extra (and therefore `all`)
+> installs **PyGithub**, which is distributed under the **LGPL**. `pip install og`
+> on its own pulls no copyleft dependency; opting into `og[observers]` is what
+> puts an LGPL library in your environment. The observers that need it import it
+> lazily, so og works fine without the extra — you just get an informative error
+> if you start the GitHub observer. See `[tool.wads.licence]` in `pyproject.toml`
+> for the recorded reasoning.
 
 ## Quick Start
 

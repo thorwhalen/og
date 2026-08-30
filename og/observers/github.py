@@ -78,8 +78,10 @@ class GithubObserver(PollingObserver):
                     self._github_client = Github()  # Anonymous access
             except ImportError:
                 raise ImportError(
-                    "PyGithub is required for GitHub observer. "
-                    "Install it with: pip install PyGithub"
+                    "PyGithub is required for the GitHub observer. "
+                    "Install it with: pip install 'og[observers]' "
+                    "(note: PyGithub is LGPL-licensed; see the README's "
+                    "Licensing section)"
                 )
         return self._github_client
 
