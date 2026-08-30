@@ -8,9 +8,26 @@ import json
 from datetime import datetime, timedelta
 from typing import Optional
 
-from flask import Flask, render_template, jsonify, request
-
 from og.query import OG
+
+_FLASK_MISSING = (
+    "flask is required for the OG web dashboard. "
+    "Install it with: pip install 'og[web]'"
+)
+
+
+def _flask():
+    """Import flask lazily, failing with a message that names the extra.
+
+    ``flask`` lives in the ``web`` extra, so importing it at module scope made
+    ``og.web`` unimportable on a bare install — and, because CI collects
+    doctests across the whole package, uncollectable too.
+    """
+    try:
+        import flask
+    except ImportError as e:  # pragma: no cover - depends on install extras
+        raise ImportError(_FLASK_MISSING) from e
+    return flask
 
 
 class OGDashboard:
@@ -35,13 +52,17 @@ class OGDashboard:
         self.og = og_instance
         self.host = host
         self.port = port
-        self.app = Flask(__name__, template_folder='templates')
+        self.app = _flask().Flask(__name__, template_folder='templates')
 
         # Register routes
         self._setup_routes()
 
     def _setup_routes(self):
         """Setup Flask routes."""
+        # Bound here rather than at module scope (see _flask()); the nested
+        # route handlers below close over these names.
+        _f = _flask()
+        render_template, jsonify, request = _f.render_template, _f.jsonify, _f.request
 
         @self.app.route('/')
         def index():
