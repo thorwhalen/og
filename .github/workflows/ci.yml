@@ -93,7 +93,24 @@ jobs:
 
   publish:
     name: Publish
-    if: "!contains(github.event.head_commit.message, '[skip ci]') && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')"
+    # DISABLED, and not as a preference: the `og` name on PyPI belongs to an
+    # UNRELATED package -- "Frequent itemsets -- fp-tree naeseth", homepage
+    # github.com/t-c-w/og, last released 0.0.5 in June 2025. Publishing from
+    # this repo would overwrite that project's name with this one's code.
+    #
+    # This has been survived only because this workflow has never gone green on
+    # the default branch, so the job never ran. That is luck, not a guard, and
+    # it expires the moment validation passes.
+    #
+    # This workflow is the legacy inline one; it does not read
+    # [tool.wads.ci.publish] from pyproject.toml, so the guard recorded there
+    # is documentation until this repo moves to the wads reusable workflow.
+    # THIS line is what actually holds.
+    #
+    # To publish: pick a name that is ours (`og` is not), rename
+    # [project].name to it, then restore the condition below.
+    #   if: "!contains(github.event.head_commit.message, '[skip ci]') && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')"
+    if: false
     needs: validation
     runs-on: ubuntu-latest
     strategy:

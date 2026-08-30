@@ -189,3 +189,22 @@ distance. Revisit only if the GitHub observer ever moves back into the
 core import path, or if og starts shipping frozen/bundled artifacts where
 the LGPL relink freedom is no longer automatic.
 """
+
+# --------------------------------------------------------------------------
+# PyPI publishing is OFF, and this is a name collision, not a preference.
+#
+# The `og` name on PyPI is already taken by an UNRELATED package -- "Frequent
+# itemsets -- fp-tree naeseth", homepage github.com/t-c-w/og, last released
+# 0.0.5 in June 2025. Publishing from this repo would overwrite that project's
+# name with this one's code.
+#
+# wads defaults `publish_enabled` to true, so without this table every merge to
+# main uploads. That has been survived so far only by remembering to put
+# `[skip ci]` in the merge title -- a ritual, which is to say a thing that gets
+# forgotten exactly once. The guard belongs in the file.
+#
+# To publish this package: pick a name that is ours (`og` is not), rename
+# `[project].name` to it, and flip this back to true.
+# --------------------------------------------------------------------------
+[tool.wads.ci.publish]
+enabled = false
