@@ -150,10 +150,21 @@ doctest_optionflags = ["NORMALIZE_WHITESPACE", "ELLIPSIS"]
 # and so extras are checked rather than silently skipped.
 # --------------------------------------------------------------------------
 [tool.wads.licence]
-project_licence = "MIT"
-allow = ["MIT", "BSD-2-Clause", "BSD-3-Clause", "Apache-2.0", "ISC", "PSF-2.0"]
+# Written in the schema `wads-licence-check` actually reads (wads#71). The
+# earlier hand-written shape here used `project_licence` / `allow`, which the
+# tool rejects: `project_licence` restated `[project].license` as a second
+# source of truth, and `allow` had no `deny` counterpart to pair with.
+#
+# `allowed` and `forbidden` are omitted on purpose. They REPLACE the shipped
+# defaults rather than extending them, so the six-entry `allow` list this
+# replaces was a narrowing: it dropped `Apache Software License` (which is what
+# a free-text field usually says), HPND, Zlib, CC0, 0BSD and Unlicense, all of
+# which are permissive, and all of which would have surfaced as UNCLASSIFIED
+# noise. The defaults are the superset; add to them here only if something
+# genuinely new turns up.
+#
 # Hard deps alone would report og as clean, which is correct and incomplete.
-include_extras = ["observers", "all"]
+include-extras = ["observers", "all"]
 
 [[tool.wads.licence.exceptions]]
 dependency = "PyGithub"
@@ -178,3 +189,22 @@ distance. Revisit only if the GitHub observer ever moves back into the
 core import path, or if og starts shipping frozen/bundled artifacts where
 the LGPL relink freedom is no longer automatic.
 """
+
+# --------------------------------------------------------------------------
+# PyPI publishing is OFF, and this is a name collision, not a preference.
+#
+# The `og` name on PyPI is already taken by an UNRELATED package -- "Frequent
+# itemsets -- fp-tree naeseth", homepage github.com/t-c-w/og, last released
+# 0.0.5 in June 2025. Publishing from this repo would overwrite that project's
+# name with this one's code.
+#
+# wads defaults `publish_enabled` to true, so without this table every merge to
+# main uploads. That has been survived so far only by remembering to put
+# `[skip ci]` in the merge title -- a ritual, which is to say a thing that gets
+# forgotten exactly once. The guard belongs in the file.
+#
+# To publish this package: pick a name that is ours (`og` is not), rename
+# `[project].name` to it, and flip this back to true.
+# --------------------------------------------------------------------------
+[tool.wads.ci.publish]
+enabled = false
