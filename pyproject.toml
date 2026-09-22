@@ -108,6 +108,12 @@ minimal = [
     "openai>=1.0.0",
 ]
 
+[tool.hatch.build.targets.wheel]
+# Hatchling infers the package to ship from [project].name (hyphens -> underscores),
+# which no longer matches this repo's import directory now that the distribution
+# name and the import name have diverged (see #3). State it explicitly.
+packages = ["og"]
+
 [tool.ruff]
 line-length = 88
 target-version = "py310"
