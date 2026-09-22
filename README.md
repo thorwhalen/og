@@ -48,26 +48,30 @@ On top of this observation layer, OG adds an intelligent agent capable of interp
 
 ```bash
 # Basic installation
-pip install og
+pip install own-ghost
 
 # With all observers and features
-pip install og[all]
+pip install own-ghost[all]
 
 # Specific feature sets
-pip install og[observers]     # GitHub, keyboard, filesystem and process observers
-pip install og[web]           # Web dashboard
-pip install og[privacy]       # Encryption and privacy features
-pip install og[integrations]  # Email, Slack, Calendar, Music, Export integrations
+pip install own-ghost[observers]     # GitHub, keyboard, filesystem and process observers
+pip install own-ghost[web]           # Web dashboard
+pip install own-ghost[privacy]       # Encryption and privacy features
+pip install own-ghost[integrations]  # Email, Slack, Calendar, Music, Export integrations
 
 # Development
-pip install og[dev]
+pip install own-ghost[dev]
 
 # Minimal installation (just core features)
-pip install og[minimal]
+pip install own-ghost[minimal]
 ```
 
+The distribution is named `own-ghost` (the `og` name on PyPI is an unrelated
+package); the import name is still `import og`. Note this package is not
+currently published to PyPI — see `[tool.wads.ci.publish]` in `pyproject.toml`.
+
 > **Licensing note.** og is MIT. The `observers` extra (and therefore `all`)
-> installs **PyGithub**, which is distributed under the **LGPL**. `pip install og`
+> installs **PyGithub**, which is distributed under the **LGPL**. `pip install own-ghost`
 > on its own pulls no copyleft dependency; opting into `og[observers]` is what
 > puts an LGPL library in your environment. The observers that need it import it
 > lazily, so og works fine without the extra — you just get an informative error
